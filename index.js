@@ -100,8 +100,8 @@ class SashiDoTeachableMachine {
     }
 
     try {
-      const modelURL = `${modelUrl}model.json`;
-      const response = await fetch(`${modelUrl}metadata.json`);
+      const modelURL = `${modelUrl}model.json?e=`+Date.now()
+      const response = await fetch(`${modelUrl}metadata.json?e=`+Date.now());
       const body = await response.text();
       this.model = await tf.loadLayersModel(modelURL);
       this.model.classes = JSON.parse(body).labels;
