@@ -5,6 +5,7 @@ const tf = require('@tensorflow/tfjs');
 const PImage = require('pureimage');
 const isImageUrl = require('is-image-url');
 const parseDataUrl = require('parse-data-url');
+const resizeImg = require('resize-image-buffer');
 
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -181,6 +182,10 @@ class SashiDoTeachableMachine {
         buffer = await data.buffer();
       }
 
+      buffer = await resizeImg(buffer, {
+        width: 224,
+        height: 224,
+      });
       const stream = bufferToStream(buffer);
       let imageBitmap;
 
@@ -191,6 +196,7 @@ class SashiDoTeachableMachine {
       if (/jpe?g/.test(contentType)) {
         imageBitmap = await PImage.decodeJPEGFromStream(stream);
       }
+      console.log(imageBitmap);
 
       const predictions = await predict(imageBitmap, this.model);
       return predictions;
