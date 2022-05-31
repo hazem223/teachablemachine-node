@@ -123,10 +123,10 @@ class SashiDoTeachableMachine {
           },
         }
       );
-      //log metadata
-      const metadata = await response.json();
-      console.log(metadata.timeStamp);
       const body = await response.text();
+      //log metadata
+      const metadata = JSON.parse(body);
+      console.log(metadata.timeStamp);
       this.model = await tf.loadLayersModel(modelURL);
       this.model.classes = JSON.parse(body).labels;
       // console.log('@@@', this.model)
