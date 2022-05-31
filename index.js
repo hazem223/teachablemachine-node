@@ -196,7 +196,7 @@ class SashiDoTeachableMachine {
       if (/jpe?g/.test(contentType)) {
         imageBitmap = await PImage.decodeJPEGFromStream(stream);
       }
-      console.log(imageBitmap);
+      // console.log(imageBitmap);
 
       const predictions = await predict(imageBitmap, this.model);
       return predictions;
