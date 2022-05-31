@@ -27,6 +27,7 @@
   "main": "index.js",
   "dependencies": {
     "@tensorflow/tfjs": "^2.3.0",
+    "resize-image-buffer": "^1.0.0",
     "is-image-url": "^1.1.8",
     "node-fetch": "^2.6.0",
     "parse-data-url": "^4.0.1",
