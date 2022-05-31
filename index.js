@@ -114,7 +114,18 @@ class SashiDoTeachableMachine {
         'https://storage.googleapis.com/tm-model/'
       );
       const modelURL = `${modelUrl}model.json?e=` + Date.now();
-      const response = await fetch(`${modelUrl}metadata.json?e=` + Date.now());
+      // fetch without cache
+      const response = await fetch(
+        `${modelUrl}metadata.json?e=` + Date.now() + '&noCache=1',
+        {
+          headers: {
+            'Cache-Control': 'no-cache',
+          },
+        }
+      );
+      //log metadata
+      const metadata = await response.json();
+      console.log(metadata.timeStamp);
       const body = await response.text();
       this.model = await tf.loadLayersModel(modelURL);
       this.model.classes = JSON.parse(body).labels;
