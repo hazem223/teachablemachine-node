@@ -183,8 +183,8 @@ class SashiDoTeachableMachine {
       }
 
       buffer = await resizeImg(buffer, {
-        width: 250,
-        height: 250,
+        width: 500,
+        height: 500,
       });
       const stream = bufferToStream(buffer);
       let imageBitmap;
