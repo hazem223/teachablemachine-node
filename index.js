@@ -184,7 +184,6 @@ class SashiDoTeachableMachine {
         contentType = data.headers.get('Content-Type');
         buffer = await data.buffer();
       }
-      console.log(Opb)
       buffer = await resizeImg(buffer, Opb);
       const stream = bufferToStream(buffer);
       let imageBitmap;
