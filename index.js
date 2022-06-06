@@ -127,7 +127,7 @@ class SashiDoTeachableMachine {
       const body = await response.text();
       //log metadata
       const metadata = JSON.parse(body);
-      console.log(metadata.timeStamp);
+      console.log(new Date(metadata.timeStamp));
       this.model = await tf.loadLayersModel(modelURL);
       this.model.classes = JSON.parse(body).labels;
       // console.log('@@@', this.model)
