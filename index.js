@@ -148,7 +148,10 @@ class SashiDoTeachableMachine {
 
   async classify(params) {
     const { imageUrl } = params;
-
+    const { Opb } = params || {
+      width: 300,
+      height: 300,
+    };
     if (!imageUrl.startsWith('data:image/') && !isImageUrl(imageUrl)) {
       return Promise.reject({ error: 'Image URL is not valid!' });
     }
@@ -164,7 +167,7 @@ class SashiDoTeachableMachine {
     ); // method, delay, retries
   }
 
-  async inference({ imageUrl }) {
+  async inference({ imageUrl, Opb }) {
     try {
       let data;
       let buffer;
@@ -181,11 +184,8 @@ class SashiDoTeachableMachine {
         contentType = data.headers.get('Content-Type');
         buffer = await data.buffer();
       }
-
-      buffer = await resizeImg(buffer, {
-        width: 300,
-        height: 300,
-      });
+      console.log(Opb)
+      buffer = await resizeImg(buffer, Opb);
       const stream = bufferToStream(buffer);
       let imageBitmap;
 
